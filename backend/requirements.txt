@@ -1,0 +1,43 @@
+# FastAPI and server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.23
+asyncpg==0.29.0  # PostgreSQL async driver
+databricks-sql-connector==3.0.2  # Databricks connector
+databricks-sdk==0.17.0  # Databricks SDK for Unity Catalog and Volumes
+alembic==1.12.1  # Database migrations
+
+# PySpark for data processing
+pyspark==3.5.0
+pandas==2.1.4  # DataFrame operations
+
+# Celery for task scheduling
+celery==5.3.4
+redis==5.0.1  # Celery broker/backend
+
+# Authentication and security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.1.1
+pydantic[email]==2.5.0
+pydantic-settings==2.1.0
+
+# AWS S3
+boto3==1.33.6
+botocore==1.33.6
+
+# File handling
+aiofiles==23.2.1
+python-magic==0.4.27  # File type detection
+
+# Monitoring and logging
+prometheus-client==0.19.0
+
+# CORS and middleware
+python-dotenv==1.0.0
+
+# Utilities
+httpx==0.25.2  # HTTP client for async requests

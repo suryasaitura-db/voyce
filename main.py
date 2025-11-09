@@ -1,68 +1,28 @@
 """
-Voyce Application - Main Entry Point
-Configured for local development with localhost settings
+Voyce - Voice Feedback Platform
+Main application entry point for local development
 """
 import os
+import sys
 from pathlib import Path
+
+# Add backend to path
+sys.path.insert(0, str(Path(__file__).parent))
+
 from dotenv import load_dotenv
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 # Load environment variables
 env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
+# Import the FastAPI app from backend
+from backend.app.main import app
+
 # Configuration
 HOST = os.getenv('HOST', 'localhost')
 PORT = int(os.getenv('PORT', 8000))
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
-ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000,http://localhost:8000').split(',')
-
-# Initialize FastAPI app
-app = FastAPI(
-    title="Voyce",
-    description="Databricks-powered application",
-    version="1.0.0",
-    debug=DEBUG
-)
-
-# Configure CORS for local development
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/")
-async def root():
-    """Health check endpoint"""
-    return {
-        "status": "healthy",
-        "app": "voyce",
-        "environment": os.getenv('ENVIRONMENT', 'development'),
-        "databricks_profile": os.getenv('DATABRICKS_PROFILE', 'DEFAULT')
-    }
-
-@app.get("/health")
-async def health_check():
-    """Detailed health check"""
-    return {
-        "status": "ok",
-        "host": HOST,
-        "port": PORT,
-        "debug": DEBUG
-    }
-
-@app.get("/api/v1/status")
-async def api_status():
-    """API status endpoint"""
-    return {
-        "api_version": os.getenv('API_VERSION', 'v1'),
-        "status": "operational"
-    }
 
 def main():
     """Run the application locally"""

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voyce - Voice Feedback</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Voyce</h1>
+      <p class="subtitle">Voice Feedback Platform</p>
+    </header>
+
+    <div class="status-bar">
+      <div class="status-message" id="statusMessage">Ready to record</div>
+      <div class="queue-counter" id="queueCounter">Queue: 0</div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-group">
+        <label for="languageSelect">Language</label>
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="hi">Hindi</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="kn">Kannada</option>
+          <option value="ml">Malayalam</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="categorySelect">Category</label>
+        <select id="categorySelect">
+          <option value="government">Government</option>
+          <option value="private">Private</option>
+          <option value="product">Product</option>
+          <option value="infrastructure">Infrastructure</option>
+          <option value="health">Health</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="authToken">Authentication Token (Optional)</label>
+        <input type="password" id="authToken" placeholder="Enter JWT token">
+        <button id="saveToken" class="btn-secondary">Save Token</button>
+      </div>
+    </div>
+
+    <div class="recording-section">
+      <div class="timer" id="timer">00:00</div>
+      <button id="recordButton" class="btn-record">
+        <span class="icon">🎙️</span>
+        <span class="text">Start Recording</span>
+      </button>
+      <div class="recording-indicator" id="recordingIndicator"></div>
+    </div>
+
+    <div class="actions">
+      <button id="uploadQueueButton" class="btn-primary" disabled>
+        Upload Queue
+      </button>
+      <button id="clearQueueButton" class="btn-secondary" disabled>
+        Clear Queue
+      </button>
+    </div>
+
+    <div class="footer">
+      <div class="connection-status">
+        <span id="connectionStatus" class="status-dot offline"></span>
+        <span id="connectionText">Offline</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

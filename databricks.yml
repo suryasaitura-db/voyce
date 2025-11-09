@@ -1,0 +1,50 @@
+# Databricks Asset Bundle Configuration
+bundle:
+  name: voyce
+
+# Use [DEFAULT] profile for all operations
+workspace:
+  profile: DEFAULT
+
+# Databricks runtime configuration
+resources:
+  jobs:
+    default:
+      job_clusters:
+        - job_cluster_key: default
+          new_cluster:
+            # Using latest Databricks Runtime
+            # For serverless SQL, this will be overridden
+            spark_version: 15.4.x-scala2.12
+            node_type_id: i3.xlarge
+            num_workers: 2
+            spark_conf:
+              "spark.databricks.cluster.profile": "serverless"
+            custom_tags:
+              project: voyce
+
+  # SQL Warehouse configuration for serverless SQL
+  sql:
+    warehouses:
+      default:
+        name: voyce-sql-warehouse
+        cluster_size: Small
+        enable_serverless_compute: true
+        auto_stop_mins: 10
+        tags:
+          custom_tags:
+            - key: project
+              value: voyce
+
+targets:
+  dev:
+    mode: development
+    workspace:
+      profile: DEFAULT
+      host: ${workspace.host}
+
+  prod:
+    mode: production
+    workspace:
+      profile: DEFAULT
+      host: ${workspace.host}
